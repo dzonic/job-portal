@@ -1,6 +1,6 @@
-from django.views.generic import TemplateView,ListView
+from django.views.generic import TemplateView, ListView
 
-from jobs.models import Job
+from jobs.models import Job, Category
 
 
 class HomeView(ListView):
@@ -8,3 +8,8 @@ class HomeView(ListView):
     context_object_name = 'jobs'
     model = Job
     paginate_by = 1
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
