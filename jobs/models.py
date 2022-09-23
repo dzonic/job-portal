@@ -37,7 +37,7 @@ class Job(models.Model):
     publishing_date = models.DateField(auto_now_add=True)
     slug = models.SlugField(default=None, editable=False)
     employer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="jobs",default=1)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="jobs", default=1)
 
     def __str__(self):
         return self.title
