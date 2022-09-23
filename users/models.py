@@ -4,6 +4,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from PIL import Image
+from ckeditor.fields import RichTextField
 
 
 class UserManager(BaseUserManager):
@@ -55,7 +56,7 @@ class Profile(models.Model):
     image = models.ImageField(upload_to="media/users")
     birth_day = models.DateField(default=None, blank=True, null=True)
     location = models.CharField(max_length=100, blank=True)
-    resume = models.TextField(blank=True)
+    resume = RichTextField(blank=True)
     company = models.CharField(max_length=250, blank=True)
 
     def __str__(self):
