@@ -1,9 +1,10 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
-from users.forms import AccountRegisterForm
+from users.forms import AccountRegisterForm, UserUpdateForm
+from users.models import Profile
 
 
 # Create your views here.
@@ -33,3 +34,10 @@ class UserLoginView(LoginView):
 
 class UserLogoutView(LogoutView):
     template_name = 'users/login.html'
+
+
+class UserUpdateView(SuccessMessageMixin, UpdateView):
+    model = Profile
+    success_message = "You updated your profile !"
+    template_name = 'users/update.html'
+    form_class = UserUpdateForm
