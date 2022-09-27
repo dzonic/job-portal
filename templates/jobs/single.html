@@ -26,7 +26,17 @@
             <form method="post">
               {% csrf_token %}
             {% if user.is_employee %}
-            <input type="submit" value="Apply" class="btn-primary py-2 mr-1">
+
+              <div class="ml-auto d-flex">
+                {% if employee_applied %}
+                <input type="submit" value="Apply" disabled="disabled" title="You Already applied" class="btn btn-primary py-2 mr-1">
+              {% else %}
+                <input type="submit" value="Apply" class="btn btn-primary py-2 mr-1">
+                <a href="#" class="btn btn-danger rounded-circle btn-favorite d-flex align-items-center">
+                <span class="icon-heart"></span>
+                </a>
+                {% endif %}
+              </div>
             {% endif %}
             </form>
 
