@@ -1,6 +1,8 @@
-from django.views.generic import TemplateView, ListView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import TemplateView, ListView, CreateView
 
 from jobs.models import Job, Category
+from .forms import *
 
 
 class HomeView(ListView):
@@ -13,3 +15,11 @@ class HomeView(ListView):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         return context
+
+
+class CreateJobView(SuccessMessageMixin, CreateView):
+    model = Job
+    template_name = 'jobs/create-jobs.html'
+    form_class = CreateJobForm
+    success_url = '/'
+    success_message = "Job has been posted!"
