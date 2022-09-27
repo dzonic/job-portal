@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, ListView, CreateView, DetailView
@@ -75,7 +76,8 @@ class SearchJobView(ListView):
         q3 = self.request.GET.get("job_location")
 
         if q1 or q2 or q3:
-            return Job.objects.filter(title__icontains=q1,
+            return Job.objects.filter(Q(title__icontains=q1)|
+                                      Q(description__icontains=q1),
                                       job_type=q2,
                                       location__icontains=q3
                                       ).order_by('-id')
