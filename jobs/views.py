@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, ListView, CreateView, DetailView
 
@@ -39,9 +40,23 @@ class SingleJobView(DetailView):
     model = Job
     context_object_name = 'job'
 
-
     def get_context_data(self, **kwargs):
         context = super(SingleJobView, self).get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         return context
 
+
+class CategoryDetailView(ListView):
+    model = Job
+    template_name = 'jobs/category-detail.html'
+    context_object_name = 'jobs'
+    paginate_by = 2
+
+    def get_queryset(self):
+        self.category = get_object_or_404(Category, pk=self.kwargs['pk'])
+        return Job.objects.filter(category=self.category)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(CategoryDetailView, self).get_context_data(*args, **kwargs)
+        context['categories'] = Category.objects.all()
+        return context
