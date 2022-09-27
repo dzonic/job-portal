@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView, ListView, CreateView
+from django.views.generic import TemplateView, ListView, CreateView, DetailView
 
 from jobs.models import Job, Category
 from .forms import *
@@ -32,3 +32,16 @@ class CreateJobView(SuccessMessageMixin, CreateView):
         job.employer = self.request.user
         job.save()
         return super(CreateJobView, self).form_valid(form)
+
+
+class SingleJobView(DetailView):
+    template_name = 'jobs/single.html'
+    model = Job
+    context_object_name = 'job'
+
+
+    def get_context_data(self, **kwargs):
+        context = super(SingleJobView, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
