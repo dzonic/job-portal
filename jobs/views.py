@@ -12,7 +12,7 @@ class HomeView(ListView):
     template_name = 'jobs/index.html'
     context_object_name = 'jobs'
     model = Job
-    paginate_by = 1
+    paginate_by = 3
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
@@ -50,7 +50,7 @@ class CategoryDetailView(ListView):
     model = Job
     template_name = 'jobs/category-detail.html'
     context_object_name = 'jobs'
-    paginate_by = 2
+    paginate_by = 3
 
     def get_queryset(self):
         self.category = get_object_or_404(Category, pk=self.kwargs['pk'])
@@ -59,4 +59,5 @@ class CategoryDetailView(ListView):
     def get_context_data(self, *args, **kwargs):
         context = super(CategoryDetailView, self).get_context_data(*args, **kwargs)
         context['categories'] = Category.objects.all()
+        context['category'] = self.category
         return context
