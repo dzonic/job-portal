@@ -48,6 +48,7 @@ class SingleJobView(SuccessMessageMixin, UpdateView):
         context = super(SingleJobView, self).get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         context['employee_applied'] = Job.objects.get(pk=self.kwargs['pk']).employee.all().filter(id=self.request.user.id)
+        context['applied_employees'] = Job.objects.get(pk=self.kwargs['pk']).employee.all()
         return context
 
     def form_valid(self, form):

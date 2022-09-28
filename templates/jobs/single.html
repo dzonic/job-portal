@@ -29,7 +29,7 @@
 
               <div class="ml-auto d-flex">
                 {% if employee_applied %}
-                <input type="submit" value="Apply" disabled="disabled" title="You Already applied" class="btn btn-primary py-2 mr-1">
+                <input disabled type="submit" value="Apply" class="btn btn-primary py-2 mr-1" title="You Already applied">
               {% else %}
                 <input type="submit" value="Apply" class="btn btn-primary py-2 mr-1">
                 <a href="#" class="btn btn-danger rounded-circle btn-favorite d-flex align-items-center">
@@ -39,6 +39,24 @@
               </div>
             {% endif %}
             </form>
+            {% if applied_employees %}
+            <div class="list-group">
+          <button type="button" class="list-group-item list-group-item-action active" style="text-align:center">
+            Applied Candidates
+        </button>
+              {% for employee in applied_employees %}
+              <button type="button" class="list-group-item list-group-item-action">{{ employee.first_name }} {{employee.last_name}}</button>
+            {% endfor %}
+       </div>
+              {% else %}
+
+               <div class="list-group">
+          <button type="button" class="list-group-item list-group-item-action active" style="text-align:center">
+            No Applied Candidates
+        </button>
+       </div>
+
+              {% endif %}
 
 
           </div> <!-- .col-md-8 -->
@@ -68,5 +86,4 @@
     </section> <!-- .section -->
 
   {% endblock %}
-
 
