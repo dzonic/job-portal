@@ -63,7 +63,7 @@ class UserUpdateView(SuccessMessageMixin, UpdateView):
         return reverse('users:update_profile', kwargs={'pk': self.object.pk})
 
 
-class EmployeeProfileView(DetailView):
+class EmployeeProfileView(CreateView):
     template_name = 'users/employee-profile.html'
     model = Account
     form_class = InviteEmployeeForm

@@ -29,6 +29,5 @@ class InviteEmployeeForm(forms.ModelForm):
         fields = ('date', 'message')
 
         widgets = {
-
             'date': forms.DateInput(attrs={'type': 'date'})
         }
