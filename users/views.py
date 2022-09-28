@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, UpdateView, DetailView
 
+from jobs.models import Category
 from users.forms import AccountRegisterForm, UserUpdateForm
 from users.models import Profile, Account
 
@@ -70,4 +71,5 @@ class EmployeeProfileView(DetailView):
         context = super(EmployeeProfileView, self).get_context_data(**kwargs)
         context['account'] = Account.objects.get(pk=self.kwargs['pk'])
         context['profile'] = Profile.objects.get(user_id=self.kwargs['pk'])
+        context['categories'] = Category.objects.all()
         return context
