@@ -30,6 +30,7 @@
             <hr>
             <h3>Send an Invitation to employees</h3>
             <form action="" method="post">
+                {% csrf_token %}
                <div class="row form-group">
                 <div class="col-md-12"><h3>Date</h3></div>
                 <div class="col-md-12 mb-3 mb-md-0">
