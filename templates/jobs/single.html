@@ -39,6 +39,7 @@
               </div>
             {% endif %}
             </form>
+              {% if user.is_employer %}
             {% if applied_employees %}
             <div class="list-group">
           <button type="button" class="list-group-item list-group-item-action active" style="text-align:center">
@@ -56,6 +57,7 @@
         </button>
        </div>
 
+              {% endif %}
               {% endif %}
 
 
