@@ -57,6 +57,9 @@ class Account(AbstractBaseUser, PermissionsMixin):
     def get_profile_id(self):
         return self.profile.id
 
+    def count_unread_messages(self):
+        return self.invites.filter(unread=True).count()
+
 
 class Profile(models.Model):
     user = models.OneToOneField(Account, on_delete=models.CASCADE, related_name="profile")
