@@ -109,8 +109,19 @@ class EmployeeMessagesView(ListView):
         return Job.objects.filter(invites__isnull=False, invites__user_id=self.request.user).order_by('-invites')
 
 
-
 class EmployeeDisplayMessages(DetailView):
     model = Invite
     template_name = 'users/employee-display-messages.html'
     context_object_name = 'invite'
+
+    def get_queryset(self):
+        invite = self.model.objects.filter(id=self.kwargs['pk'])
+        invite.update(unread=False)
+        return invite
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.user != request.user:
+            return HttpResponseRedirect('/')
+
+        return super(EmployeeDisplayMessages, self).get(request, *args, **kwargs)
