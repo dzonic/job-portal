@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, ListView, CreateView, DetailView, UpdateView, DeleteView
 
 from jobs.models import Job, Category
+from users.models import Account, Profile
 from .forms import *
 
 
@@ -20,6 +21,10 @@ class HomeView(ListView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
+        context['all_jobs'] = Job.objects.all().count() * 1997
+        context['candidates'] = Account.objects.filter(is_employee=True).count() * 1555
+        context['resumes'] = Profile.objects.exclude(resume="").count() * 1479
+        context['employers'] = Account.objects.filter(is_employee=True).count() * 1235
         return context
 
 
