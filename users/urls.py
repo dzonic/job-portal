@@ -11,5 +11,6 @@ urlpatterns = [
     path('employer-jobs/', EmployerPostedJobsView.as_view(), name='employer_jobs'),
     path('employer-jobs/', EmployerPostedJobsView.as_view(), name='employer_jobs'),
     path('employee-messages/<int:pk>/', EmployeeMessagesView.as_view(), name='employee_messages'),
+    path('employee-display-messages/<int:pk>/', EmployeeDisplayMessages.as_view(), name='employee_display_messages'),
 
 ]

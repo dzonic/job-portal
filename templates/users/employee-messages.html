@@ -192,7 +192,7 @@
 							   {% if job.id in user.unread_messages %}
 						     <h2 class="mr-3 text-black h4" style="color:red">{{ job.title }}</h2>
 							   {% else %}
-							   <h2 class="mr-3 text-black h4">{{ job.title }}</h2>
+						     <h2 class="mr-3 text-black h4">{{ job.title }}</h2>
 
 							   {% endif  %}
 						     <div class="badge-wrap">
@@ -216,7 +216,7 @@
 						  </div>
 
 						  <div class="ml-auto d-flex">
-						  	<a href="{% url 'jobs:single_job' job.slug job.pk %}" class="btn btn-primary py-2 mr-1">Read Message</a>
+						  	<a href="{% url 'users:employee_display_messages' pk=job.invites.all.first.id %}" class="btn btn-primary py-2 mr-1">Read Message</a>
 
                 </a>
               </div>

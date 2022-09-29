@@ -9,7 +9,7 @@ from django.views.generic import CreateView, UpdateView, DetailView, ListView
 
 from jobs.models import Category, Job
 from users.forms import AccountRegisterForm, UserUpdateForm, InviteEmployeeForm
-from users.models import Profile, Account
+from users.models import Profile, Account, Invite
 
 
 # Create your views here.
@@ -107,3 +107,10 @@ class EmployeeMessagesView(ListView):
 
     def get_queryset(self):
         return Job.objects.filter(invites__isnull=False, invites__user_id=self.request.user).order_by('-invites')
+
+
+
+class EmployeeDisplayMessages(DetailView):
+    model = Invite
+    template_name = 'users/employee-display-messages.html'
+    context_object_name = 'invite'
