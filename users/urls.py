@@ -10,6 +10,6 @@ urlpatterns = [
     path('employee-profile/<int:employee_id>/<int:job_id>/', EmployeeProfileView.as_view(), name='employee_profile'),
     path('employer-jobs/', EmployerPostedJobsView.as_view(), name='employer_jobs'),
     path('employer-jobs/', EmployerPostedJobsView.as_view(), name='employer_jobs'),
-    path('employee-messages/<int:employee_id>/', EmployeeMessagesView.as_view(), name='employee_messages'),
+    path('employee-messages/<int:pk>/', EmployeeMessagesView.as_view(), name='employee_messages'),
 
 ]
