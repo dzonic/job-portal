@@ -59,6 +59,10 @@
        </div>
 
               {% endif %}
+              <div class="tag-widget post-tag-container mb-5 mt-5">
+                <a href="{% url 'jobs:delete_job' slug=job.slug pk=job.pk %}" class="btn btn-danger py-2 mr-1">Delete</a>
+                <a href="{% url 'jobs:update_job' slug=job.slug pk=job.pk %}" class="btn btn-primary py-2 mr-1">Update</a>
+            </div>
               {% endif %}
 
 
