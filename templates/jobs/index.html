@@ -481,7 +481,7 @@
     </section>
 
 
-
+{% if user.is_authenticated and user.is_employee %}
 <script type="text/javascript">
     function addtomywishlist(id) {
         if (id){
@@ -493,7 +493,7 @@
                     const Toast = Swal.mixin({
                     toast: true,
                     position: 'top',
-                    showConfirmButton: false,
+                    showConfirmButton: true,
                     timer: 2000,
                     timerProgressBar: true,
                     didOpen: (toast) => {
@@ -543,4 +543,40 @@
     }
 
 </script>
+
+{% else %}
+<script type="text/javascript">
+    function addtomywishlist(id) {
+        if (id){
+            $.ajax({
+                method:"GET",
+                success:function () {
+                    const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: true,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                    })
+
+                Toast.fire({
+                    icon: 'error',
+                    title: 'You are not an employee!'
+                })
+                }
+            });
+        }
+
+    }
+
+
+
+</script>
+{% endif %}
+
+
 {% endblock %}
