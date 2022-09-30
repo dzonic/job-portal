@@ -157,3 +157,19 @@ class RemoveFromWishListView(UpdateView):
 
         else:
             return redirect('jobs:home')
+
+
+class MyWishListView(ListView):
+    template_name = 'users/my-wishlist.html'
+    context_object_name = 'jobs'
+    model = Job
+    paginate_by = 5
+
+    def get_queryset(self):
+        return Job.objects.filter(wish_list__user_id=self.request.user.id)
+
+    def get_context_data(self, **kwargs):
+        context = super(MyWishListView, self).get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            context['wish_list'] = Job.objects.filter(wish_list__user_id=self.request.user.id).values_list('id', flat=True)
+        return context
