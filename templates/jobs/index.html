@@ -490,7 +490,22 @@
                 method:"GET",
                 success:function () {
                 $('#jobwl' +id).removeClass('btn-primary').addClass('btn-danger')
-                    alert("success")
+                    const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                    })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'You Added!'
+                })
                 }
             });
         }
@@ -505,7 +520,22 @@
                 method:"GET",
                 success:function () {
                 $('#jobwl' +id).removeClass('btn-danger').addClass('btn-danger')
-                    alert("success")
+                    const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: true,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                        })
+
+                Toast.fire({
+                 icon: 'success',
+                title: 'You Removed!'
+                })
                 }
             });
         }

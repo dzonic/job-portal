@@ -134,7 +134,7 @@ class AddWishListView(UpdateView):
 
     def get(self, request, *args, **kwargs):
         if self.request.user.is_employee:
-            job = Job.obejcts.get(id=self.kwargs['pk'])
+            job = Job.objects.get(id=self.kwargs['pk'])
             profile = Profile.objects.get(user=request.user)
             profile.wish_list.add(job)
             return redirect('jobs:home')
@@ -150,7 +150,7 @@ class RemoveFromWishListView(UpdateView):
 
     def get(self, request, *args, **kwargs):
         if self.request.user.is_employee:
-            job = Job.obejcts.get(id=self.kwargs['pk'])
+            job = Job.objects.get(id=self.kwargs['pk'])
             profile = Profile.objects.get(user=request.user)
             profile.wish_list.remove(job)
             return redirect('jobs:home')

@@ -128,8 +128,11 @@
 
 
 
+
 		<section class="ftco-section bg-light">
 			<div class="container">
+				{% if user.is_employee %}
+				{% if jobs %}
 				<div class="row justify-content-center mb-5 pb-3">
           <div class="col-md-7 heading-section text-center ftco-animate">
           	<span class="subheading">Recently Added Jobs</span>
@@ -182,6 +185,20 @@
 						</div>
           </div> <!-- end -->
             {% endfor %}
+					{% else %}
+					<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h2 class="mb-4"><span>Your Wish List is </span> Empty!</h2>
+          </div>
+        </div>
+					{% endif %}
+					{% else %}
+					<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h2 class="mb-4"><span>You are not An</span> Employee!</h2>
+          </div>
+        </div>
+				{% endif %}
 				</div>
 				<div class="row mt-5">
                     {% if is_paginated %}
