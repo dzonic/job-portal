@@ -171,5 +171,6 @@ class MyWishListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(MyWishListView, self).get_context_data(**kwargs)
         if self.request.user.is_authenticated:
-            context['wish_list'] = Job.objects.filter(wish_list__user_id=self.request.user.id).values_list('id', flat=True)
+            context['wish_list'] = Job.objects.filter(wish_list__user_id=self.request.user.id).values_list('id',
+                                                                                                           flat=True)
         return context

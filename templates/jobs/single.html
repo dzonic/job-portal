@@ -15,6 +15,7 @@
         </div>
       </div>
     </div>
+</div>
 
     <section class="ftco-section ftco-degree-bg">
       <div class="container">
@@ -32,9 +33,17 @@
                 <input disabled type="submit" value="Apply" class="btn btn-primary py-2 mr-1" title="You Already applied">
               {% else %}
                 <input type="submit" value="Apply" class="btn btn-primary py-2 mr-1">
-                <a href="#" class="btn btn-danger rounded-circle btn-favorite d-flex align-items-center">
-                <span class="icon-heart"></span>
+
+                  {% if in_my_list %}
+                <a href="javascript:void(0);"id="jobwl{{ job.id }}" title="Remove from my wish list" onclick="addorremove({{ job.id }})" class="btn btn-danger rounded-circle btn-favorite d-flex align-items-center">
+                	<span class="icon-heart"></span>
                 </a>
+                              {% else %}
+                      <a href="javascript:void(0);" id="jobwl{{ job.id }}" title="Add to my wish list" onclick="addorremove({{ job.id }})" class="btn btn-primary rounded-circle btn-favorite d-flex align-items-center">
+                	<span class="icon-heart"></span>
+                </a>
+                               {% endif %}
+
                 {% endif %}
               </div>
             {% endif %}
@@ -91,6 +100,7 @@
         </div>
       </div>
     </section> <!-- .section -->
+
 
   {% endblock %}
 

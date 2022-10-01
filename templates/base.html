@@ -59,6 +59,7 @@
                   <li><a class="dropdown-item" href="{% url 'users:employee_messages' pk=user.pk  %}">You have {{ user.count_unread_messages }} message(s)</a></li>
                   <li><a class="dropdown-item" href="{% url 'users:my_wishlist' pk=user.id %}">My Wish List</a></li>
                   <li><a class="dropdown-item" href="{% url 'users:update_profile' pk=user.get_profile_id %}">Update Profile</a></li>
+                  <li><a class="dropdown-item" href="{% url 'users:password_change' %}">Change Password</a></li>
                   <li><a class="dropdown-item" href="{% url 'users:logout' %}">Logout</a></li>
                 </ul>
               </div>
@@ -74,6 +75,7 @@
               {% if user.get_profile_id %}
                   <li><a class="dropdown-item" href="{% url 'users:update_profile' pk=user.get_profile_id %}">Update Profile</a></li>
               {% endif %}
+                  <li><a class="dropdown-item" href="{% url 'users:password_change' %}">Change Password</a></li>
                   <li><a class="dropdown-item" href="{% url 'users:logout' %}">Logout</a></li>
                 </ul>
               </div>
@@ -160,7 +162,7 @@
             	<div class="block-23 mb-3">
 	              <ul>
 	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+381 69 338 9835</span></a></li>
 	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
 	              </ul>
 	            </div>
@@ -201,6 +203,12 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="{% static "js/google-map.js" %}"></script>
   <script src="{% static "js/main.js" %}"></script>
+  {% if user.is_authenticated and user.is_employee %}
+  <script src="{% static "js/addorremove.js" %}"></script>
+  {% else %}
+  <script src="{% static "js/addorremove2.js" %}"></script>
+  {% endif %}
+
 
   </body>
 </html>

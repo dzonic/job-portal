@@ -26,7 +26,8 @@ class HomeView(ListView):
         context['resumes'] = Profile.objects.exclude(resume="").count() * 1479
         context['employers'] = Account.objects.filter(is_employee=True).count() * 1235
         if self.request.user.is_authenticated:
-            context['wish_list'] = Job.objects.filter(wish_list__user_id=self.request.user.id).values_list('id', flat=True)
+            context['wish_list'] = Job.objects.filter(wish_list__user_id=self.request.user.id).values_list('id',
+                                                                                                           flat=True)
         return context
 
 
@@ -57,6 +58,8 @@ class SingleJobView(SuccessMessageMixin, UpdateView):
         context['categories'] = Category.objects.all()
         context['employee_applied'] = Job.objects.get(pk=self.kwargs['pk']).employee.all().filter(
             id=self.request.user.id)
+        context['in_my_list'] = Job.objects.get(pk=self.kwargs['pk']).wish_list.all().filter(
+            user_id=self.request.user.id)
         try:
             context['applied_employees'] = Job.objects.get(pk=self.kwargs['pk'],
                                                            employer_id=self.request.user.id).employee.all()
@@ -157,4 +160,3 @@ class DeleteJobView(SuccessMessageMixin, DeleteView):
             return HttpResponseRedirect('/')
 
         return super(DeleteJobView, self).get(request, *args, **kwargs)
-
