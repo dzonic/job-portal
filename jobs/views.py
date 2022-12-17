@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, ListView, CreateView, DetailView, UpdateView, DeleteView
@@ -160,3 +160,7 @@ class DeleteJobView(SuccessMessageMixin, DeleteView):
             return HttpResponseRedirect('/')
 
         return super(DeleteJobView, self).get(request, *args, **kwargs)
+
+
+def about(request):
+    return render(request, 'about.html', {})
