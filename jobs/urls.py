@@ -12,5 +12,6 @@ urlpatterns = [
     path('update/<slug>/<int:pk>/', UpdateJobView.as_view(), name="update_job"),
     path('delete/<slug>/<int:pk>/', DeleteJobView.as_view(), name="delete_job"),
     path('category-detail/<slug>/<int:pk>/', CategoryDetailView.as_view(), name="category_detail"),
-    path('about', views.about, name="about")
+    path('about', views.about, name="about"),
+    path('contact', views.contact, name="contact")
 ]
